@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyDeslave" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="70%" stop-color="#64748b" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+    <linearGradient id="mudSlide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" />
+      <stop offset="50%" stop-color="#451a03" />
+      <stop offset="100%" stop-color="#292524" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#skyDeslave)" />
+
+  <!-- Rain storm streaks -->
+  <g stroke="#93c5fd" stroke-width="1" opacity="0.25">
+    <line x1="50" y1="20" x2="10" y2="120" />
+    <line x1="150" y1="10" x2="110" y2="110" />
+    <line x1="280" y1="40" x2="240" y2="140" />
+    <line x1="420" y1="20" x2="380" y2="120" />
+    <line x1="560" y1="10" x2="520" y2="110" />
+    <line x1="700" y1="30" x2="660" y2="130" />
+  </g>
+
+  <!-- Hill slope -->
+  <polygon points="0,50 800,220 800,500 0,500" fill="#1e3a1e" />
+  <!-- Landslide Scar / Mud Flow -->
+  <path d="M 280 110 Q 320 220 260 280 Q 210 340 180 430 L 460 480 Q 420 370 380 300 Q 360 210 330 120 Z" fill="url(#mudSlide)" />
+
+  <!-- Vulnerable Hillside House -->
+  <g transform="translate(140, 240)">
+    <polygon points="40,0 0,30 80,30" fill="#b91c1c" />
+    <rect x="10" y="30" width="60" height="40" fill="#f8fafc" stroke="#334155" stroke-width="2" />
+    <rect x="25" y="45" width="15" height="25" fill="#475569" />
+    <rect x="50" y="40" width="12" height="12" fill="#38bdf8" />
+  </g>
+
+  <!-- Mud reaching perimeter wall -->
+  <polygon points="120,310 240,320 230,350 110,340" fill="#78350f" stroke="#451a03" stroke-width="2" />
+
+  <!-- Evacuation Cordon / Yellow Tape -->
+  <path d="M 80 380 Q 260 360 460 410" stroke="#facc15" stroke-width="8" stroke-dasharray="30,10" />
+  <text x="160" y="375" font-family="Arial, sans-serif" font-size="9" font-weight="900" fill="#000000">ZONA DE RIESGO - EVACUACIÓN PREVENTIVA</text>
+
+  <!-- Camera HUD -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <rect x="25" y="25" width="380" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#f59e0b" stroke-width="1.5" />
+  <text x="38" y="44" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="800" fill="#f8fafc">EVIDENCIA FOTOGRÁFICA DE INCIDENCIA</text>
+  <text x="38" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600" fill="#fcd34d">TEMA: DESLAVES Y DESLIZAMIENTOS DE LADERA</text>
+
+  <rect x="610" y="25" width="165" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#dc2626" stroke-width="1.5" />
+  <text x="622" y="44" font-family="monospace" font-size="10" font-weight="bold" fill="#fca5a5">ESTATUS OFICIAL:</text>
+  <text x="622" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="800" fill="#ef4444">EN PROCESO DE ATENCIÓN</text>
+
+  <rect x="25" y="445" width="750" height="30" rx="3" fill="#0f172a" fill-opacity="0.85" />
+  <text x="38" y="464" font-family="monospace" font-size="10" fill="#94a3b8">COORD: SIERRA ALTA / HUASTECA | PROTECCIÓN CIVIL ESTATAL | INSPECCIÓN DE ESTRUCTURA</text>
+  <text x="650" y="464" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">EXP: CORTE OFICIAL</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Fallen large tree across roadway -->
+  <rect width="800" height="500" fill="#475569" />
+  <polygon points="0,280 800,260 800,500 0,500" fill="#1e293b" />
+  
+  <!-- Fallen Trunk across street -->
+  <path d="M 60 420 Q 280 340 520 280 L 560 330 Q 320 390 80 470 Z" fill="#713f12" stroke="#451a03" stroke-width="2" />
+  <!-- Tree foliage blocking passage -->
+  <circle cx="140" cy="380" r="70" fill="#15803d" opacity="0.9" />
+  <circle cx="210" cy="340" r="85" fill="#166534" opacity="0.9" />
+  <circle cx="280" cy="320" r="65" fill="#14532d" opacity="0.9" />
+  <!-- Chainsaw Cuts / Troceo de madera -->
+  <line x1="380" y1="310" x2="360" y2="370" stroke="#fef08a" stroke-width="3" stroke-dasharray="6,4" />
+  <line x1="460" y1="280" x2="440" y2="340" stroke="#fef08a" stroke-width="3" stroke-dasharray="6,4" />
+
+  <!-- Emergency Response Cones -->
+  <polygon points="560,450 575,390 585,390 600,450" fill="#ea580c" />
+  <rect x="568" y="415" width="24" height="8" fill="#ffffff" />
+
+  <!-- Camera HUD -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <rect x="25" y="25" width="380" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#16a34a" stroke-width="1.5" />
+  <text x="38" y="44" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="800" fill="#f8fafc">EVIDENCIA FOTOGRÁFICA DE INCIDENCIA</text>
+  <text x="38" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600" fill="#86efac">TEMA: CAÍDA DE ÁRBOLES Y DESPEJE DE VÍA</text>
+
+  <rect x="610" y="25" width="165" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#16a34a" stroke-width="1.5" />
+  <text x="622" y="44" font-family="monospace" font-size="10" font-weight="bold" fill="#bbf7d0">ESTATUS OFICIAL:</text>
+  <text x="622" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="800" fill="#22c55e">ATENDIDO / LIBRE</text>
+
+  <rect x="25" y="445" width="750" height="30" rx="3" fill="#0f172a" fill-opacity="0.85" />
+  <text x="38" y="464" font-family="monospace" font-size="10" fill="#94a3b8">BRIGADA DE BOMBEROS | SECCIONAMIENTO CON MOTOSIERRA Y RETIRO COMPLETO</text>
+  <text x="650" y="464" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">EXP: CORTE OFICIAL</text>
+</svg>

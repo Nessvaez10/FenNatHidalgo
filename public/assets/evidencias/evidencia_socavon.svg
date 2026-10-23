@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="holeDepth" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#020617" />
+      <stop offset="65%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#475569" />
+    </radialGradient>
+  </defs>
+
+  <!-- Asphalt Road Texture -->
+  <rect width="800" height="500" fill="#334155" />
+  <rect x="0" y="0" width="800" height="150" fill="#475569" />
+  <!-- Sidewalk -->
+  <rect x="0" y="140" width="800" height="20" fill="#94a3b8" stroke="#64748b" />
+  <!-- Road White Edge Lines -->
+  <line x1="0" y1="180" x2="800" y2="180" stroke="#f8fafc" stroke-width="4" />
+  <line x1="0" y1="460" x2="800" y2="460" stroke="#f8fafc" stroke-width="4" />
+
+  <!-- Massive Crater / Sinkhole (Socavón) -->
+  <ellipse cx="400" cy="310" rx="260" ry="130" fill="url(#holeDepth)" />
+  <!-- Asphalt Fractures and Cracks around the hole -->
+  <path d="M 140 310 L 80 330 M 150 270 L 90 250 M 220 200 L 190 170 M 580 200 L 630 160 M 660 310 L 730 330 M 580 410 L 640 450 M 340 435 L 320 480" stroke="#0f172a" stroke-width="4" stroke-linecap="round" fill="none" />
+
+  <!-- Exposed Broken Pipes & Subsoil Strata inside the Sinkhole -->
+  <path d="M 280 280 L 360 320" stroke="#0284c7" stroke-width="12" stroke-linecap="round" />
+  <path d="M 440 320 L 520 290" stroke="#0284c7" stroke-width="12" stroke-linecap="round" />
+  <ellipse cx="400" cy="335" rx="140" ry="60" fill="#090d16" />
+
+  <!-- Barricade / Safety Drums around Sinkhole -->
+  <g transform="translate(160, 240)">
+    <rect x="0" y="0" width="16" height="40" fill="#ea580c" />
+    <rect x="0" y="10" width="16" height="8" fill="#ffffff" />
+    <rect x="0" y="26" width="16" height="8" fill="#ffffff" />
+  </g>
+  <g transform="translate(620, 240)">
+    <rect x="0" y="0" width="16" height="40" fill="#ea580c" />
+    <rect x="0" y="10" width="16" height="8" fill="#ffffff" />
+    <rect x="0" y="26" width="16" height="8" fill="#ffffff" />
+  </g>
+  <path d="M 176 255 L 620 255" stroke="#facc15" stroke-width="4" stroke-dasharray="15,10" />
+
+  <!-- Camera HUD -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <rect x="25" y="25" width="380" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#d97706" stroke-width="1.5" />
+  <text x="38" y="44" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="800" fill="#f8fafc">EVIDENCIA FOTOGRÁFICA DE INCIDENCIA</text>
+  <text x="38" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600" fill="#fcd34d">TEMA: SOCAVONES Y COLAPSOS DE CALZADA</text>
+
+  <rect x="610" y="25" width="165" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#dc2626" stroke-width="1.5" />
+  <text x="622" y="44" font-family="monospace" font-size="10" font-weight="bold" fill="#fca5a5">ESTATUS OFICIAL:</text>
+  <text x="622" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="800" fill="#ef4444">EN PROCESO DE ATENCIÓN</text>
+
+  <rect x="25" y="445" width="750" height="30" rx="3" fill="#0f172a" fill-opacity="0.85" />
+  <text x="38" y="464" font-family="monospace" font-size="10" fill="#94a3b8">DICTAMEN GEOLÓGICO | ACORDONAMIENTO PREVENTIVO Y DESVÍO VEHICULAR</text>
+  <text x="650" y="464" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">EXP: CORTE OFICIAL</text>
+</svg>

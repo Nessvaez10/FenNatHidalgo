@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="riverSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+    <linearGradient id="mudWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="40%" stop-color="#78350f" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#riverSky)" />
+
+  <!-- Mountain Background & Trees -->
+  <polygon points="0,140 220,90 480,160 800,80 800,240 0,240" fill="#14532d" opacity="0.6" />
+  <polygon points="0,200 800,200 800,280 0,280" fill="#166534" />
+
+  <!-- Concrete Riverbank / Wall partially submerged -->
+  <rect x="0" y="270" width="800" height="30" fill="#475569" stroke="#334155" />
+  <!-- Bridge Pylons -->
+  <rect x="180" y="220" width="50" height="150" fill="#64748b" />
+  <rect x="520" y="220" width="50" height="150" fill="#64748b" />
+  <!-- Bridge Deck -->
+  <rect x="0" y="210" width="800" height="25" fill="#334155" />
+
+  <!-- Turbid Swollen River Wave Surge -->
+  <path d="M 0 290 Q 200 270 400 300 T 800 285 L 800 500 L 0 500 Z" fill="url(#mudWater)" />
+  <!-- Rapids Foam / White Caps -->
+  <path d="M 40 330 Q 140 310 240 330 T 440 325 T 640 320 T 780 335" stroke="#fde68a" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7" />
+  <path d="M 80 390 Q 220 370 380 395 T 720 385" stroke="#fef08a" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.8" />
+  <path d="M 20 440 Q 260 415 500 450 T 790 430" stroke="#fef3c7" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.6" />
+
+  <!-- Water Level Metric Gauge Marker / Escala Hidrométrica -->
+  <g transform="translate(140, 240)">
+    <rect x="0" y="0" width="22" height="150" fill="#ffffff" stroke="#000000" stroke-width="1.5" />
+    <rect x="0" y="0" width="22" height="50" fill="#dc2626" />
+    <rect x="0" y="50" width="22" height="40" fill="#f59e0b" />
+    <rect x="0" y="90" width="22" height="60" fill="#16a34a" />
+    <line x1="0" y1="20" x2="10" y2="20" stroke="#000000" stroke-width="2" />
+    <line x1="0" y1="40" x2="10" y2="40" stroke="#000000" stroke-width="2" />
+    <line x1="0" y1="70" x2="10" y2="70" stroke="#000000" stroke-width="2" />
+    <text x="26" y="25" font-family="monospace" font-size="9" font-weight="bold" fill="#dc2626">DESBORDE (110%)</text>
+  </g>
+
+  <!-- Camera HUD -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <rect x="25" y="25" width="380" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#0284c7" stroke-width="1.5" />
+  <text x="38" y="44" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="800" fill="#f8fafc">EVIDENCIA FOTOGRÁFICA DE INCIDENCIA</text>
+  <text x="38" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600" fill="#7dd3fc">TEMA: CRECIENTE Y DESBORDAMIENTO DE RÍOS</text>
+
+  <rect x="610" y="25" width="165" height="48" rx="4" fill="#1e293b" fill-opacity="0.88" stroke="#dc2626" stroke-width="1.5" />
+  <text x="622" y="44" font-family="monospace" font-size="10" font-weight="bold" fill="#fca5a5">ESTATUS OFICIAL:</text>
+  <text x="622" y="60" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="800" fill="#ef4444">EN PROCESO DE ATENCIÓN</text>
+
+  <rect x="25" y="445" width="750" height="30" rx="3" fill="#0f172a" fill-opacity="0.85" />
+  <text x="38" y="464" font-family="monospace" font-size="10" fill="#94a3b8">MONITOREO DE CAUCE | RÍO MOCTEZUMA / AMAJAC / TULA | ALERTA HIDROLÓGICA</text>
+  <text x="650" y="464" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="bold" fill="#fbbf24">EXP: CORTE OFICIAL</text>
+</svg>
