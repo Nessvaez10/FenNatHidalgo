@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tenangoSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="70%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+    <linearGradient id="mudSlide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f" />
+      <stop offset="50%" stop-color="#9a3412" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="900" height="560" fill="url(#tenangoSky)" />
+
+  <!-- Mountain Backdrop -->
+  <polygon points="0,180 280,100 560,190 850,90 900,120 900,340 0,340" fill="#14532d" opacity="0.8" />
+  <rect x="0" y="140" width="900" height="70" fill="#cbd5e1" opacity="0.3" filter="blur(6px)" />
+
+  <!-- Road with Total Closure Barrier (Peña Blanca - El Nanthe) -->
+  <polygon points="120,380 720,380 880,560 0,560" fill="#334155" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Massive Mud and Rock Slide Blocking Entire Road -->
+  <path d="M 280 340 Q 420 310 520 330 Q 680 390 740 480 Q 640 540 400 530 Q 250 510 220 440 Z" fill="url(#mudSlide)" stroke="#451a03" stroke-width="3" />
+  
+  <!-- Large Boulders & Rocks on Slide -->
+  <polygon points="360,420 420,380 460,430 400,460" fill="#78716c" stroke="#44403c" stroke-width="2" />
+  <polygon points="480,450 560,410 590,470 520,500" fill="#a8a29e" stroke="#57534e" stroke-width="2" />
+  <polygon points="300,460 340,430 370,470 330,490" fill="#57534e" />
+
+  <!-- Fallen Pine Tree Embedded in Mud -->
+  <line x1="280" y1="410" x2="480" y2="450" stroke="#78350f" stroke-width="14" stroke-linecap="round" />
+  <!-- Pine Foliage -->
+  <polygon points="460,420 540,400 520,460" fill="#14532d" />
+  <polygon points="490,430 570,420 540,480" fill="#166534" />
+
+  <!-- Red Barrier & Total Closure Sign in Foreground -->
+  <g transform="translate(140, 430)">
+    <!-- Barrier Bar -->
+    <rect x="0" y="0" width="240" height="24" rx="3" fill="#dc2626" stroke="#991b1b" stroke-width="2" />
+    <line x1="30" y1="0" x2="50" y2="24" stroke="#ffffff" stroke-width="8" />
+    <line x1="80" y1="0" x2="100" y2="24" stroke="#ffffff" stroke-width="8" />
+    <line x1="130" y1="0" x2="150" y2="24" stroke="#ffffff" stroke-width="8" />
+    <line x1="180" y1="0" x2="200" y2="24" stroke="#ffffff" stroke-width="8" />
+    <!-- Stand Posts -->
+    <rect x="30" y="24" width="8" height="60" fill="#475569" />
+    <rect x="200" y="24" width="8" height="60" fill="#475569" />
+    <!-- Sign -->
+    <rect x="40" y="-45" width="160" height="38" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
+    <text x="120" y="-22" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="900" fill="#f8fafc" text-anchor="middle">CIERRE TOTAL</text>
+  </g>
+
+  <!-- Technical Overlay HUD -->
+  <rect x="20" y="20" width="860" height="520" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5" />
+
+  <!-- Header Badge -->
+  <g transform="translate(30, 30)">
+    <rect width="490" height="58" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#dc2626" stroke-width="2" />
+    <circle cx="24" cy="29" r="10" fill="#dc2626" />
+    <text x="44" y="26" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="900" fill="#f8fafc">FICHA ESPECÍFICA • TENANGO DE DORIA, HGO.</text>
+    <text x="44" y="45" font-family="Montserrat, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#fca5a5">PEÑA BLANCA - EL NANTHE • DESLAVE ACTIVO</text>
+  </g>
+
+  <!-- Status Badge -->
+  <g transform="translate(630, 30)">
+    <rect width="240" height="58" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#dc2626" stroke-width="2" />
+    <text x="35" y="26" font-family="monospace" font-size="10" font-weight="bold" fill="#fca5a5">FOLIO 18 • PC TENANGO</text>
+    <text x="35" y="46" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="900" fill="#ef4444">CIERRE TOTAL / MONITOREO</text>
+  </g>
+
+  <!-- Bottom Data Strip -->
+  <g transform="translate(30, 495)">
+    <rect width="840" height="38" rx="5" fill="#090d16" fill-opacity="0.92" stroke="#334155" stroke-width="1" />
+    <text x="20" y="23" font-family="monospace" font-size="10" fill="#cbd5e1">
+      <tspan fill="#ef4444" font-weight="bold">CONDICIÓN ACTUAL:</tspan> Deslizamiento activo en masa arcillosa • Tránsito vehicular suspendido preventivamente
+    </text>
+    <text x="730" y="23" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="bold" fill="#f87171">ALTO RIESGO</text>
+  </g>
+</svg>

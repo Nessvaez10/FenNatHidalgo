@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" height="100%">
+  <defs>
+    <linearGradient id="skyHuautla" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="50%" stop-color="#64748b" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+    <linearGradient id="tamoyonWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="35%" stop-color="#0369a1" />
+      <stop offset="70%" stop-color="#78350f" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+    <linearGradient id="asphaltRoad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="900" height="560" fill="url(#skyHuautla)" />
+
+  <!-- Huasteca Mountains Backdrop -->
+  <polygon points="0,220 180,120 380,200 620,110 820,190 900,160 900,340 0,340" fill="#14532d" opacity="0.75" />
+  <polygon points="0,270 240,190 490,260 740,180 900,240 900,380 0,380" fill="#166534" opacity="0.9" />
+
+  <!-- Dense Huasteca Vegetation & Palms on Riverbank -->
+  <path d="M 0 320 Q 80 290 160 325 T 320 315 T 500 330 T 700 315 T 900 325 L 900 390 L 0 390 Z" fill="#15803d" />
+
+  <!-- Swollen Tamoyón River Body -->
+  <path d="M 0 360 Q 220 330 450 365 T 900 350 L 900 560 L 0 560 Z" fill="url(#tamoyonWater)" />
+
+  <!-- River Rapids, Eddies and Current Highlights -->
+  <path d="M 30 410 Q 180 390 320 415 T 620 405 T 870 415" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7" />
+  <path d="M 60 460 Q 250 440 450 465 T 840 450" stroke="#fde68a" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.6" />
+  <path d="M 20 510 Q 280 480 550 515 T 890 495" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5" />
+
+  <!-- Concrete Ford / Low-Water Bridge ("Cruce del Río Tamoyón Primero") -->
+  <polygon points="120,410 780,410 840,490 60,490" fill="url(#asphaltRoad)" stroke="#475569" stroke-width="3" filter="url(#shadow)" />
+  <!-- Bridge Curbs and Guide Posts -->
+  <polygon points="120,405 780,405 780,413 120,413" fill="#94a3b8" />
+  <polygon points="60,487 840,487 845,497 55,497" fill="#64748b" />
+
+  <!-- Central Road Stripping -->
+  <line x1="160" y1="450" x2="260" y2="450" stroke="#facc15" stroke-width="4" stroke-dasharray="16,12" />
+  <line x1="290" y1="450" x2="430" y2="450" stroke="#facc15" stroke-width="4" stroke-dasharray="16,12" />
+  <line x1="470" y1="450" x2="610" y2="450" stroke="#facc15" stroke-width="4" stroke-dasharray="16,12" />
+  <line x1="640" y1="450" x2="740" y2="450" stroke="#facc15" stroke-width="4" stroke-dasharray="16,12" />
+
+  <!-- Hydrometric Gauge Pole (Regla Limnimétrica) on Bridge Pier -->
+  <g transform="translate(140, 310)">
+    <rect x="0" y="0" width="22" height="150" fill="#ffffff" stroke="#000000" stroke-width="2" />
+    <rect x="0" y="0" width="22" height="35" fill="#dc2626" />
+    <rect x="0" y="35" width="22" height="40" fill="#f59e0b" />
+    <rect x="0" y="75" width="22" height="75" fill="#16a34a" />
+    <line x1="0" y1="20" x2="10" y2="20" stroke="#000000" stroke-width="2" />
+    <line x1="0" y1="40" x2="10" y2="40" stroke="#000000" stroke-width="2" />
+    <line x1="0" y1="70" x2="10" y2="70" stroke="#000000" stroke-width="2" />
+    <line x1="0" y1="100" x2="10" y2="100" stroke="#000000" stroke-width="2" />
+    <!-- Marker label -->
+    <rect x="26" y="75" width="135" height="22" rx="3" fill="#0f172a" fill-opacity="0.9" />
+    <text x="32" y="90" font-family="monospace" font-size="10" font-weight="bold" fill="#4ade80">NIVEL NORMAL (BAJÓ)</text>
+  </g>
+
+  <!-- Road Traffic Sign: Acceso a Banderas -->
+  <g transform="translate(680, 310)">
+    <!-- Post -->
+    <rect x="38" y="50" width="8" height="85" fill="#475569" />
+    <!-- Sign board -->
+    <rect x="0" y="0" width="140" height="52" rx="4" fill="#15803d" stroke="#ffffff" stroke-width="2" filter="url(#shadow)" />
+    <text x="12" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff">BANDERAS ➔</text>
+    <text x="12" y="40" font-family="Arial, sans-serif" font-size="9" fill="#dcfce7">Y 6 COMUNIDADES</text>
+  </g>
+
+  <!-- Preventative Ribbon Cleared to the Side (Representing Restored Access) -->
+  <g transform="translate(580, 415)">
+    <rect x="0" y="0" width="80" height="12" rx="2" fill="#eab308" stroke="#ca8a04" transform="rotate(-15)" />
+    <text x="6" y="9" font-family="monospace" font-size="7" font-weight="bold" fill="#000000" transform="rotate(-15)">PRECAUCIÓN</text>
+  </g>
+
+  <!-- Technical Overlay HUD / Metadatos Oficiales de la Tarjeta SSPCyGR-157 -->
+  <rect x="20" y="20" width="860" height="520" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5" />
+  
+  <!-- Header Tag -->
+  <g transform="translate(30, 30)">
+    <rect width="470" height="58" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#0284c7" stroke-width="2" filter="url(#shadow)" />
+    <circle cx="24" cy="29" r="10" fill="#0284c7" />
+    <path d="M 24 23 L 24 33 M 19 28 L 29 28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+    <text x="44" y="26" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="900" fill="#f8fafc" letter-spacing="0.5">FICHA ESPECÍFICA • HUAUTLA, HGO.</text>
+    <text x="44" y="45" font-family="Montserrat, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#38bdf8">CRUCE DEL RÍO TAMOYÓN PRIMERO (ACCESO A BANDERAS)</text>
+  </g>
+
+  <!-- Status Badge (Top Right) -->
+  <g transform="translate(620, 30)">
+    <rect width="250" height="58" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#16a34a" stroke-width="2" filter="url(#shadow)" />
+    <circle cx="24" cy="29" r="8" fill="#22c55e" />
+    <text x="40" y="26" font-family="monospace" font-size="10" font-weight="bold" fill="#86efac">TARJETA SSPCyGR-157</text>
+    <text x="40" y="46" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="900" fill="#4ade80">PASO RESTABLECIDO</text>
+  </g>
+
+  <!-- Bottom Data Strip -->
+  <g transform="translate(30, 495)">
+    <rect width="840" height="38" rx="5" fill="#090d16" fill-opacity="0.92" stroke="#334155" stroke-width="1" />
+    <text x="20" y="23" font-family="monospace" font-size="10" fill="#cbd5e1">
+      <tspan fill="#38bdf8" font-weight="bold">COORDENADAS / REF:</tspan> 21.0315° N, -98.2890° O • <tspan fill="#facc15" font-weight="bold">EXPEDIENTE:</tspan> Cierres Homologados 10 al 22 de Julio (Pág. 2)
+    </text>
+    <text x="640" y="23" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="bold" fill="#22c55e">
+      LIBERADO SIN INCIDENTES
+    </text>
+  </g>
+</svg>
