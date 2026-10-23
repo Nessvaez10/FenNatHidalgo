@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Incident } from '../types';
 import { RUBROS_AFECTACION, FOTOS_POR_TEMA } from '../data/phenomenaData';
 import { 
@@ -13,7 +13,11 @@ import {
   Check, 
   Layers, 
   ZoomIn, 
-  ExternalLink 
+  ExternalLink,
+  ImageIcon,
+  Sparkles,
+  RotateCcw,
+  FolderOpen
 } from 'lucide-react';
 
 interface PhotoViewerModalProps {
@@ -21,6 +25,130 @@ interface PhotoViewerModalProps {
   onClose: () => void;
   onUpdatePhoto?: (incidentId: string, photoUrl: string, photoTitle: string) => void;
 }
+
+// Catálogo de imágenes locales integradas en el proyecto para asignación rápida
+export const CATALOGO_IMAGENES_LOCALES = [
+  {
+    id: 'huautla',
+    nombre: 'Huautla: Cruce Río Tamoyón Primero (Tarjeta 157)',
+    url: '/assets/evidencias/huautla_rio_tamoyon.svg',
+    titulo: 'Monitoreo de cauce y paso restablecido en el cruce del Río Tamoyón Primero (Acceso a Banderas)',
+    credito: 'Protección Civil Huautla • SSPCyGR Tarjeta 157 / Gobierno de Hidalgo',
+    categoria: 'creciente_rios'
+  },
+  {
+    id: 'tlanchinol',
+    nombre: 'Tlanchinol: Km 172 La Virgencita (Tarjeta 156)',
+    url: '/assets/evidencias/tlanchinol_virgencita_km172.svg',
+    titulo: 'Despeje de rocas y restitución vial en km 172 La Virgencita (México-Tampico)',
+    credito: 'Guardia Nacional • Protección Civil Tlanchinol / SSPCyGR Tarjeta 156',
+    categoria: 'derrumbes'
+  },
+  {
+    id: 'huehuetla',
+    nombre: 'Huehuetla: Parador Fuerza y Esperanza (Tarjeta 158)',
+    url: '/assets/evidencias/huehuetla_parador_fuerza.svg',
+    titulo: 'Camino reabierto al Parador Ecoturístico Fuerza y Esperanza tras retiro de derrumbe',
+    credito: 'Protección Civil Huehuetla • SSPCyGR Tarjeta 158',
+    categoria: 'derrumbes'
+  },
+  {
+    id: 'tenango_pena',
+    nombre: 'Tenango de Doria: Peña Blanca - El Nanthe (Folio 18)',
+    url: '/assets/evidencias/tenango_pena_blanca.svg',
+    titulo: 'Cierre total y monitoreo por deslizamiento activo en tramo Peña Blanca - El Nanthe',
+    credito: 'Protección Civil Tenango de Doria • Folio Oficial 18',
+    categoria: 'deslaves'
+  },
+  {
+    id: 'calnali_ahuimol',
+    nombre: 'Calnali: Barrio Ahuimol (Vivienda Evacuada)',
+    url: '/assets/evidencias/calnali_barrio_ahuimol.svg',
+    titulo: 'Deslave activo y vivienda deshabitada en Barrio Ahuimol, Calnali',
+    credito: 'Secretaría de Gobierno • Protección Civil Hidalgo / SIPDUS',
+    categoria: 'deslaves'
+  },
+  {
+    id: 'creciente_gen',
+    nombre: 'Creciente y Desbordamiento de Ríos',
+    url: '/assets/evidencias/evidencia_creciente_rios.svg',
+    titulo: 'Monitoreo de cauce y escurrimientos pluviales extraordinarios',
+    credito: 'Secretaría de Gobierno • Comisión Estatal del Agua / PC',
+    categoria: 'creciente_rios'
+  },
+  {
+    id: 'derrumbes_gen',
+    nombre: 'Derrumbes en Carreteras y Rocas',
+    url: '/assets/evidencias/evidencia_derrumbes.svg',
+    titulo: 'Derrumbe de material pétreo sobre carpeta asfáltica en tramo serrano',
+    credito: 'Secretaría de Gobierno • Protección Civil Hidalgo / SIPDUS',
+    categoria: 'derrumbes'
+  },
+  {
+    id: 'deslaves_gen',
+    nombre: 'Deslaves y Deslizamientos de Talud',
+    url: '/assets/evidencias/evidencia_deslaves.svg',
+    titulo: 'Deslizamiento activo de masa arcillosa y lodo sobre ladera habitada',
+    credito: 'Secretaría de Gobierno • Dictamen Técnico de Riesgos',
+    categoria: 'deslaves'
+  },
+  {
+    id: 'estructuras_gen',
+    nombre: 'Afectaciones a Puentes y Estructuras',
+    url: '/assets/evidencias/evidencia_estructuras.svg',
+    titulo: 'Fisuras y compromiso estructural en puente vehicular / muro de contención',
+    credito: 'Secretaría de Gobierno • Dictamen Técnico SIPDUS',
+    categoria: 'afectaciones_estructurales'
+  },
+  {
+    id: 'arboles_gen',
+    nombre: 'Caída de Árboles y Despeje de Vía',
+    url: '/assets/evidencias/evidencia_caida_arboles.svg',
+    titulo: 'Árbol colapsado sobre vía pública seccionado con motosierra',
+    credito: 'Secretaría de Gobierno • Bomberos y Protección Civil',
+    categoria: 'caida_arboles'
+  },
+  {
+    id: 'socavon_gen',
+    nombre: 'Socavones y Hundimientos',
+    url: '/assets/evidencias/evidencia_socavon.svg',
+    titulo: 'Socavón de carpeta asfáltica por socavación subsuperficial pluvial',
+    credito: 'Secretaría de Gobierno • Cuadrilla de Infraestructura Municipal',
+    categoria: 'socavon'
+  },
+  {
+    id: 'inundaciones_gen',
+    nombre: 'Inundaciones y Encharcamientos',
+    url: '/assets/evidencias/evidencia_inundaciones.svg',
+    titulo: 'Acumulación pluvial severa e inspección de paso vehicular',
+    credito: 'Secretaría de Gobierno • Brigadas de Respuesta Inmediata',
+    categoria: 'encharcamientos'
+  },
+  {
+    id: 'electrico_gen',
+    nombre: 'Suministro Eléctrico (CFE)',
+    url: '/assets/evidencias/evidencia_suministro_electrico.svg',
+    titulo: 'Postes y cableado derribado por rachas de viento y caída de ramas',
+    credito: 'Secretaría de Gobierno • Cuadrilla CFE',
+    categoria: 'suministro_electrico'
+  },
+  {
+    id: 'vias_gen',
+    nombre: 'Vías y Accesos Restringidos',
+    url: '/assets/evidencias/evidencia_vias_accesos.svg',
+    titulo: 'Paso habilitado a un solo carril con señalamiento de obra',
+    credito: 'Secretaría de Gobierno • SIPDUS / SICT Federal',
+    categoria: 'vias_accesos'
+  },
+  {
+    id: 'monitoreo_gen',
+    nombre: 'Monitoreo Preventivo y Recorridos',
+    url: '/assets/evidencias/evidencia_monitoreo.svg',
+    titulo: 'Inspección técnica de zonas vulnerables y laderas serranas',
+    credito: 'Secretaría de Gobierno • Unidad de Monitoreo Preventivo',
+    categoria: 'monitoreo_preventivo'
+  }
+];
 
 export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
   incident,
@@ -33,8 +161,16 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
   const [customUrl, setCustomUrl] = useState<string>(incident.fotoUrl || '');
   const [customTitle, setCustomTitle] = useState<string>(incident.fotoTitulo || '');
 
+  // Synchronize state when incident changes
+  useEffect(() => {
+    setCustomUrl(incident.fotoUrl || '');
+    setCustomTitle(incident.fotoTitulo || '');
+    setIsEditingPhoto(false);
+  }, [incident.id, incident.fotoUrl, incident.fotoTitulo]);
+
   // Determine photo url: custom or default by theme
   const defaultPhoto = FOTOS_POR_TEMA[incident.tipoAfectacion] || FOTOS_POR_TEMA.derrumbes;
+  const hasSpecificPhoto = Boolean(incident.fotoUrl);
   const currentPhotoUrl = incident.fotoUrl || defaultPhoto.url;
   const currentTitle = incident.fotoTitulo || defaultPhoto.tituloDefault;
   const currentCredito = incident.fotoCredito || defaultPhoto.creditoDefault;
@@ -55,6 +191,23 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
     setIsEditingPhoto(false);
   };
 
+  const handleSelectPreset = (preset: typeof CATALOGO_IMAGENES_LOCALES[0]) => {
+    if (onUpdatePhoto) {
+      onUpdatePhoto(incident.id, preset.url, preset.titulo);
+      setCustomUrl(preset.url);
+      setCustomTitle(preset.titulo);
+    }
+  };
+
+  const handleResetToDefault = () => {
+    if (onUpdatePhoto) {
+      onUpdatePhoto(incident.id, '', '');
+      setCustomUrl('');
+      setCustomTitle('');
+      setIsEditingPhoto(false);
+    }
+  };
+
   const handleLocalFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -62,9 +215,10 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
       reader.onload = (event) => {
         const result = event.target?.result as string;
         if (result && onUpdatePhoto) {
-          onUpdatePhoto(incident.id, result, file.name);
+          const title = `Foto de campo: ${incident.municipio} - ${incident.comunidadPunto}`;
+          onUpdatePhoto(incident.id, result, title);
           setCustomUrl(result);
-          setCustomTitle(file.name);
+          setCustomTitle(title);
           setIsEditingPhoto(false);
         }
       };
@@ -89,6 +243,16 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
                 <span className="text-xs text-rose-200">
                   {rubroConfig.nombreCorto}
                 </span>
+                {hasSpecificPhoto ? (
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-emerald-300" />
+                    Foto Específica de Esta Ficha
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-slate-300 bg-white/10 px-2 py-0.5 rounded border border-white/20">
+                    Imagen de Referencia por Rubro
+                  </span>
+                )}
               </div>
               <h3 className="text-lg font-bold font-serif leading-tight">
                 {incident.municipio} • {incident.comunidadPunto}
@@ -125,19 +289,31 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
               <span className="px-2 py-1 rounded text-xs font-semibold bg-slate-900/80 text-amber-300 border border-amber-400/40 backdrop-blur-xs">
                 {incident.tipoAfectacionLabel}
               </span>
+              {incident.fenomenoNombre && (
+                <span className="px-2 py-1 rounded text-xs font-semibold bg-slate-900/80 text-sky-200 border border-sky-400/40 backdrop-blur-xs hidden sm:inline">
+                  {incident.fenomenoNombre}
+                </span>
+              )}
             </div>
 
             {/* Bottom Photo Caption */}
-            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-3 pt-6 text-white text-xs flex flex-wrap items-center justify-between gap-2">
+            <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-transparent p-3 pt-6 text-white text-xs flex flex-wrap items-center justify-between gap-2">
               <div className="max-w-xl">
-                <p className="font-semibold text-slate-100">{currentTitle}</p>
+                <p className="font-semibold text-slate-100 flex items-center gap-1.5">
+                  <span>{currentTitle}</span>
+                  {hasSpecificPhoto && (
+                    <span className="text-[10px] bg-emerald-600/80 text-white px-1.5 py-0.2 rounded font-mono">
+                      Específica
+                    </span>
+                  )}
+                </p>
                 <p className="text-[11px] text-slate-400">{currentCredito}</p>
               </div>
               <div className="flex items-center gap-2">
                 <a
                   href={currentPhotoUrl}
                   download={`evidencia_${incident.municipio}_${incident.comunidadPunto}.svg`}
-                  className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium rounded border border-white/20 inline-flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium rounded border border-white/20 inline-flex items-center gap-1 cursor-pointer transition-colors"
                   title="Descargar imagen"
                 >
                   <Download className="w-3 h-3 text-[#BC955B]" />
@@ -183,85 +359,149 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
             )}
           </div>
 
-          {/* Action: Toggle Edit / Link Custom Photo */}
+          {/* Control Bar: Link / Change Photo for this Card */}
           <div className="border-t border-slate-200 pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <button
-              onClick={() => setIsEditingPhoto(!isEditingPhoto)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300 transition-colors cursor-pointer"
-            >
-              <Upload className="w-3.5 h-3.5 text-[#691C32]" />
-              <span>{isEditingPhoto ? 'Cancelar edición' : 'Asociar foto propia o cambiar archivo'}</span>
-            </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setIsEditingPhoto(!isEditingPhoto)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#691C32] hover:bg-[#501526] text-white text-xs font-semibold rounded-lg shadow-xs transition-colors cursor-pointer"
+              >
+                <Camera className="w-3.5 h-3.5 text-amber-300" />
+                <span>{isEditingPhoto ? 'Ocultar Opciones de Imagen' : 'Vincular / Cambiar Imagen de Esta Ficha'}</span>
+              </button>
+
+              {hasSpecificPhoto && (
+                <button
+                  onClick={handleResetToDefault}
+                  className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium rounded-lg border border-slate-300 cursor-pointer transition-colors"
+                  title="Restablecer a la imagen por defecto del tema"
+                >
+                  <RotateCcw className="w-3 h-3 text-slate-500" />
+                  <span>Restablecer por Defecto</span>
+                </button>
+              )}
+            </div>
 
             <span className="text-[11px] text-slate-500 font-mono">
-              Ruta en proyecto: <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700">{currentPhotoUrl}</code>
+              Archivo actual: <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-semibold">{currentPhotoUrl}</code>
             </span>
           </div>
 
-          {/* Form to link custom photo */}
+          {/* Interactive Panel to Link / Assign Local Image */}
           {isEditingPhoto && (
-            <div className="p-4 bg-slate-100 rounded-xl border border-slate-300 space-y-3 text-xs animate-in fade-in duration-200">
-              <div className="flex items-center justify-between">
-                <strong className="text-slate-800 font-serif">Asignar Fotografía Específica a esta Incidencia</strong>
-                <span className="text-[10px] text-slate-500">Se aloja en el proyecto</span>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-300 space-y-4 text-xs animate-in fade-in duration-200">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <div>
+                  <strong className="text-slate-900 font-serif block">
+                    Vincular Imagen Local Distinta a esta Ficha
+                  </strong>
+                  <p className="text-[11px] text-slate-500">
+                    Puedes elegir una imagen específica de las contingencias oficiales, escribir una ruta local o cargar una fotografía de campo.
+                  </p>
+                </div>
+                <span className="text-[10px] bg-slate-200 text-slate-700 font-mono px-2 py-0.5 rounded">
+                  ID: {incident.id}
+                </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    Ruta interna del archivo (ej. /assets/evidencias/foto_01.jpg):
+              {/* 1. Quick Presets from Local Evidence Catalog */}
+              <div>
+                <label className="block text-[11px] font-bold text-slate-700 mb-1.5 flex items-center gap-1">
+                  <FolderOpen className="w-3.5 h-3.5 text-[#691C32]" />
+                  <span>1. Seleccionar de las Fotografías de Eventos Específicos Integrados:</span>
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                  {CATALOGO_IMAGENES_LOCALES.map((preset) => {
+                    const isSelected = currentPhotoUrl === preset.url;
+                    return (
+                      <button
+                        key={preset.id}
+                        type="button"
+                        onClick={() => handleSelectPreset(preset)}
+                        className={`text-left p-2 rounded-lg border text-[11px] transition-all cursor-pointer flex items-center gap-2 ${
+                          isSelected
+                            ? 'bg-amber-50 border-[#691C32] text-[#691C32] font-bold shadow-xs ring-1 ring-[#691C32]'
+                            : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700'
+                        }`}
+                      >
+                        <div className="w-7 h-7 rounded bg-slate-800 shrink-0 overflow-hidden border border-slate-300">
+                          <img src={preset.url} alt="" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="truncate flex-1">
+                          <span className="block truncate">{preset.nombre}</span>
+                          <span className="text-[9px] font-mono text-slate-400 block truncate">{preset.url}</span>
+                        </div>
+                        {isSelected && <Check className="w-3.5 h-3.5 text-[#691C32] shrink-0" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 2. Manual Local Path or Upload */}
+              <div className="pt-2 border-t border-slate-200">
+                <label className="block text-[11px] font-bold text-slate-700 mb-1 flex items-center gap-1">
+                  <ImageIcon className="w-3.5 h-3.5 text-[#691C32]" />
+                  <span>2. O Ingresar Ruta Local Personalizada / Cargar desde Dispositivo:</span>
+                </label>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                  <div>
+                    <label className="block text-[10px] text-slate-500 mb-1">
+                      Ruta local en el proyecto (ej. <code>/assets/evidencias/huautla_rio_tamoyon.svg</code>):
+                    </label>
+                    <input
+                      type="text"
+                      value={customUrl}
+                      onChange={(e) => setCustomUrl(e.target.value)}
+                      placeholder="/assets/evidencias/..."
+                      className="w-full px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-lg focus:ring-1 focus:ring-[#691C32] focus:outline-none font-mono"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-500 mb-1">
+                      O subir foto desde tu equipo:
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLocalFileUpload}
+                      className="w-full text-xs text-slate-600 file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-[#691C32] file:text-white hover:file:bg-[#501526] cursor-pointer"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-2.5">
+                  <label className="block text-[10px] text-slate-500 mb-1">
+                    Título o descripción de la fotografía:
                   </label>
                   <input
                     type="text"
-                    value={customUrl}
-                    onChange={(e) => setCustomUrl(e.target.value)}
-                    placeholder="/assets/evidencias/..."
+                    value={customTitle}
+                    onChange={(e) => setCustomTitle(e.target.value)}
+                    placeholder="Ej: Monitoreo del río Tamoyón Primero y paso restablecido..."
                     className="w-full px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-lg focus:ring-1 focus:ring-[#691C32] focus:outline-none"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                    O Cargar foto desde tu dispositivo:
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleLocalFileUpload}
-                    className="w-full text-xs text-slate-600 file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-[#691C32] file:text-white hover:file:bg-[#501526] cursor-pointer"
-                  />
+                <div className="flex justify-end gap-2 pt-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsEditingPhoto(false)}
+                    className="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 cursor-pointer"
+                  >
+                    Cerrar panel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveCustomPhoto}
+                    className="px-4 py-1.5 rounded-lg bg-[#691C32] hover:bg-[#501526] text-white font-semibold flex items-center gap-1 cursor-pointer shadow-xs"
+                  >
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Guardar en esta Ficha</span>
+                  </button>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                  Título descriptivo de la fotografía:
-                </label>
-                <input
-                  type="text"
-                  value={customTitle}
-                  onChange={(e) => setCustomTitle(e.target.value)}
-                  placeholder="Ej: Deslave en km 42 de la carretera estatal..."
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-slate-300 rounded-lg focus:ring-1 focus:ring-[#691C32] focus:outline-none"
-                />
-              </div>
-
-              <div className="flex justify-end gap-2 pt-1">
-                <button
-                  type="button"
-                  onClick={() => setIsEditingPhoto(false)}
-                  className="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="button"
-                  onClick={handleSaveCustomPhoto}
-                  className="px-4 py-1.5 rounded-lg bg-[#691C32] hover:bg-[#501526] text-white font-semibold flex items-center gap-1 cursor-pointer"
-                >
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Guardar Asociación de Fotografía</span>
-                </button>
               </div>
             </div>
           )}
@@ -270,13 +510,13 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
         {/* Modal Footer */}
         <div className="bg-slate-100 px-5 py-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
           <span className="font-medium">
-            Secretaría de Gobierno • Protección Civil del Estado de Hidalgo
+            Secretaría de Gobierno • Subsecretaría de Protección Civil y Gestión de Riesgos de Hidalgo
           </span>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-semibold cursor-pointer transition-colors"
           >
-            Cerrar Fototeca
+            Cerrar Ficha
           </button>
         </div>
       </div>

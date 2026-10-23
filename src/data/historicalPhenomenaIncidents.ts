@@ -200,7 +200,10 @@ export const INCIDENTS_JUNIO_2026: Incident[] = [
     paginaDocumento: 3,
     fechaReporte: '14/06/2026 07:35 h',
     ultimaVerificacion: '17/06/2026 18:34 h',
-    puntosContabilizados: 1
+    puntosContabilizados: 1,
+    fotoUrl: '/assets/evidencias/tenango_pena_blanca.svg',
+    fotoTitulo: 'Cierre total y monitoreo por deslizamiento activo en tramo Peña Blanca - El Nanthe',
+    fotoCredito: 'Protección Civil Tenango de Doria • Folio Oficial 18'
   },
   {
     id: 'jun-ten-3',
@@ -679,7 +682,10 @@ export const INCIDENTS_JULIO_2026: Incident[] = [
     paginaDocumento: 3,
     fechaReporte: '17/07/2026 08:30 h',
     ultimaVerificacion: '22/07/2026 18:00 h',
-    puntosContabilizados: 1
+    puntosContabilizados: 1,
+    fotoUrl: '/assets/evidencias/tlanchinol_virgencita_km172.svg',
+    fotoTitulo: 'Despeje de rocas y restitución vial en km 172 La Virgencita (México-Tampico)',
+    fotoCredito: 'Guardia Nacional • Protección Civil Tlanchinol / SSPCyGR Tarjeta 156'
   },
   {
     id: 'jul-hua-1',
@@ -698,7 +704,10 @@ export const INCIDENTS_JULIO_2026: Incident[] = [
     paginaDocumento: 2,
     fechaReporte: '19/07/2026 12:00 h',
     ultimaVerificacion: '22/07/2026 18:00 h',
-    puntosContabilizados: 1
+    puntosContabilizados: 1,
+    fotoUrl: '/assets/evidencias/huautla_rio_tamoyon.svg',
+    fotoTitulo: 'Monitoreo de cauce y paso restablecido en el cruce del Río Tamoyón Primero (Acceso a Banderas)',
+    fotoCredito: 'Protección Civil Huautla • SSPCyGR Tarjeta 157 / Gobierno del Estado de Hidalgo'
   },
   {
     id: 'jul-hue-1',
@@ -717,7 +726,10 @@ export const INCIDENTS_JULIO_2026: Incident[] = [
     paginaDocumento: 2,
     fechaReporte: '19/07/2026 14:00 h',
     ultimaVerificacion: '22/07/2026 18:00 h',
-    puntosContabilizados: 1
+    puntosContabilizados: 1,
+    fotoUrl: '/assets/evidencias/huehuetla_parador_fuerza.svg',
+    fotoTitulo: 'Camino reabierto al Parador Ecoturístico Fuerza y Esperanza tras retiro de derrumbe',
+    fotoCredito: 'Protección Civil Huehuetla • SSPCyGR Tarjeta 158'
   },
 
   // --- ÁRBOLES MUNICIPALIZADOS ATENDIDOS (Páginas 2-3) ---
