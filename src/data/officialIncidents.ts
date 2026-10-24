@@ -64,7 +64,7 @@ const OCTOBER_OFFICIAL_INCIDENTS: Incident[] = [
     referenciaSIPDUS: SIPDUS_REF,
     ultimaVerificacion: "20/10/2026 21:13 h",
     puntosContabilizados: 1,
-    fotoUrl: "/assets/evidencias/calnali_barrio_ahuimol.svg",
+    fotoUrl: "/assets/evidencias/guillermo.jpg",
     fotoTitulo: "Deslave activo y vivienda deshabitada en Barrio Ahuimol, Calnali",
     fotoCredito: "Secretaría de Gobierno • Protección Civil Hidalgo / SIPDUS"
   },
