@@ -8,6 +8,15 @@
   background: #f8fafc;
 }
 
+/* Remove black bounding box / focus outline on SVG municipality polygons */
+.leaflet-container path:focus,
+.leaflet-container svg:focus,
+path.leaflet-interactive:focus,
+path.leaflet-interactive {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .leaflet-tooltip {
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid #cbd5e1;

@@ -185,7 +185,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
     const geoLayer = L.geoJSON(geoData, {
       style: (feature) => {
-        const rawName = feature?.properties?.NOMGEO || feature?.properties?.nom_mun || feature?.properties?.name || '';
+        const rawName = feature?.properties?.NAME_2 || feature?.properties?.NOMGEO || feature?.properties?.nom_mun || feature?.properties?.name || '';
         const norm = normalizeMunicipalityName(rawName);
         const summary = summaryByNormalizedName.get(norm);
         const semaforo: SemaforoLevel = summary ? summary.semaforo : 'gris';
@@ -206,9 +206,12 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         };
       },
       onEachFeature: (feature, layer) => {
-        const rawName = feature?.properties?.NOMGEO || feature?.properties?.nom_mun || feature?.properties?.name || '';
+        const rawName = feature?.properties?.NAME_2 || feature?.properties?.NOMGEO || feature?.properties?.nom_mun || feature?.properties?.name || '';
         const norm = normalizeMunicipalityName(rawName);
-        const summary = summaryByNormalizedName.get(norm);
+        const summary = summaryByNormalizedName.get(norm) || municipalities.find(m => 
+          normalizeMunicipalityName(m.nombre) === norm || 
+          normalizeMunicipalityName(m.nombreOficial) === norm
+        );
 
         layer.on({
           mouseover: (e) => {
@@ -225,9 +228,23 @@ export const MapComponent: React.FC<MapComponentProps> = ({
               geojsonLayerRef.current.resetStyle(e.target);
             }
           },
-          click: () => {
+          click: (e) => {
+            if (e && e.originalEvent) {
+              e.originalEvent.stopPropagation();
+            }
+            if (typeof (layer as any).closeTooltip === 'function') {
+              (layer as any).closeTooltip();
+            }
             if (summary) {
               onSelectMunicipality(summary);
+            } else {
+              const fallback = municipalities.find(m => 
+                normalizeMunicipalityName(m.nombre) === norm || 
+                normalizeMunicipalityName(m.nombreOficial) === norm
+              );
+              if (fallback) {
+                onSelectMunicipality(fallback);
+              }
             }
           }
         });
@@ -270,7 +287,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
     }).addTo(map);
 
     geojsonLayerRef.current = geoLayer;
-  }, [geoData, summaryByNormalizedName, selectedMunicipality, activeFilter, activeBasemap, onSelectMunicipality]);
+  }, [geoData, summaryByNormalizedName, selectedMunicipality, activeFilter, activeBasemap, onSelectMunicipality, municipalities]);
 
   // Render incident markers
   useEffect(() => {
@@ -348,12 +365,20 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             ${inc.afectacionDetalle}
           </div>
           
-          <button 
-            id="map-popup-btn-${inc.id}" 
-            class="w-full py-1 px-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded text-[11px] flex items-center justify-center gap-1 shadow-xs cursor-pointer transition-all"
-          >
-            📷 Ver Fotografía de Incidencia
-          </button>
+          <div class="flex flex-col gap-1.5 mt-2">
+            <button 
+              id="map-popup-btn-${inc.id}" 
+              class="w-full py-1 px-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded text-[11px] flex items-center justify-center gap-1 shadow-xs cursor-pointer transition-all"
+            >
+              📷 Ver Fotografía de Incidencia
+            </button>
+            <button 
+              id="map-popup-mun-${inc.id}" 
+              class="w-full py-1 px-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded text-[11px] flex items-center justify-center gap-1 shadow-xs cursor-pointer transition-all"
+            >
+              🏛️ Ver Ficha de ${inc.municipio}
+            </button>
+          </div>
           
           <div class="text-[10px] text-slate-400 mt-2 pt-1 border-t flex justify-between">
             <span>Pág. ${inc.paginaDocumento}</span>
@@ -373,12 +398,19 @@ export const MapComponent: React.FC<MapComponentProps> = ({
               onOpenPhoto(inc);
             };
           }
+          const munBtn = document.getElementById(`map-popup-mun-${inc.id}`);
+          if (munBtn && mun) {
+            munBtn.onclick = (e) => {
+              e.preventDefault();
+              onSelectMunicipality(mun);
+            };
+          }
         }, 50);
       });
 
       markersLayer.addLayer(marker);
     });
-  }, [incidents, showCriticalMarkers, summaryByNormalizedName, onOpenPhoto]);
+  }, [incidents, showCriticalMarkers, summaryByNormalizedName, onOpenPhoto, onSelectMunicipality]);
 
   // Center on selected municipality when it changes
   useEffect(() => {
